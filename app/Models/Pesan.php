@@ -2,24 +2,19 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Pesan extends Model
 {
-    use HasFactory;
-    protected $table = 'pesans';
-    protected $fillable = ['konsul_id', 'pesan_konsul'];
+    protected $fillable = ['siswa_id', 'guru_id', 'message'];
 
-    //relasi ke konsul
-    public function konsul()
+    public function siswa()
     {
-        return $this->belongsTo(Konsul::class, 'konsul_id');
+        return $this->belongsTo(Siswa::class);
     }
 
-    //relasi ke balasan
-    public function balasans()
+    public function guru()
     {
-        return $this->hasMany(Balasan::class, 'pesan_id');
+        return $this->belongsTo(Guru::class);
     }
 }

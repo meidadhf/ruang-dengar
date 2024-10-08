@@ -2,18 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Aunthenticatable;
 
-class Guru extends Model
+class Guru extends Aunthenticatable
 {
-    use HasFactory;
-    protected $table = 'gurus';
-    protected $fillable = ['name', 'email', 'description'];
+    protected $fillable = ['name', 'email', 'password'];
 
     //relasi ke tabel konsultasi
-    public function konsuls()
+    public function pesans()
     {
-        return $this->hasMany(Konsul::class);
+        return $this->hasMany(Pesan::class);
     }
 }

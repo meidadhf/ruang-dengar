@@ -2,18 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Aunthenticatable;
 
-class Siswa extends Model
+class Siswa extends Aunthenticatable
 {
-    use HasFactory;
-    protected $table     = 'siswas';
     protected $fillable  = ['nis', 'password'];
 
     //relasi ke tabel konsultasi
-    public function konsuls()
+    public function pesans()
     {
-        return $this->hasMany(Konsul::class);
+        return $this->hasMany(Pesan::class);
     }
 }

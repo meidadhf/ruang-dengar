@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('guru_id');
             $table->string('nama_guru');
             $table->string('email')->unique();
-            $table->text('description');
+            $table->text('password');
             $table->timestamps();
         });
     }
