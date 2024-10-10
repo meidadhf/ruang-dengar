@@ -11,9 +11,9 @@ class AdminController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function showLoginForm()
     {
-        return view('admin.login');
+        return view('guru.login');
     }
 
     /**

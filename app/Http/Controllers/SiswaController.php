@@ -12,9 +12,8 @@ class SiswaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function showLoginForm()
     {
-        //
         return view('siswa.login');
     }
 

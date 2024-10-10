@@ -10,9 +10,8 @@ class GuruController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function showLoginForm()
     {
-        //
         return view('guru.login');
     }
 
@@ -33,7 +32,7 @@ class GuruController extends Controller
 
     public function balasPesan(Request $request, $pesan_id)
     {
-        //      
+        //
     }
     /**
      * Show the form for creating a new resource.

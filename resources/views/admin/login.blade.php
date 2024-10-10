@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Ruang Dengar - AyoKonseling Tanpa Diketahui!</title>
+        <title>Ruang Dengar - Ayo Konseling Tanpa Diketahui!</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="public/template/rd.ico" />
         <!-- Custom Google font-->
@@ -25,19 +25,13 @@
                     <a class="navbar-brand" href="index.html"><span class="fw-bolder text-primary">Ruang Dengar</span></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
-                            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                            <li class="nav-item"><a class="nav-link" href="loginguru.html">Login Guru</a></li>
-                            <li class="nav-item"><a class="nav-link" href="daftarguru.html">Daftar Guru</a></li>
-                            <li class="nav-item"><a class="nav-link" href="konsul.html">Konseling</a></li>
-                        </ul>
                     </div>
                 </div>
             </nav>
             <!-- Page Content-->
             <div class="container px-5 my-5">
                 <div class="text-center mb-5">
-                    <h1 class="display-5 fw-bolder mb-0"><span class="text-gradient d-inline">Login Guru</span></h1>
+                    <h1 class="display-5 fw-bolder mb-0"><span class="text-gradient d-inline">Login Admin</span></h1>
                 </div>
                 <div class="row gx-5 justify-content-center">
                     <div class="col-lg-11 col-xl-9 col-xxl-8">
@@ -49,27 +43,22 @@
                                     <div class="text-center mb-5">
                                         <div class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 mb-3"><i class="bi bi-envelope"></i></div>
                                         <h1 class="fw-bolder">Ruang Dengar</h1>
-                                        <p class="lead fw-normal text-muted mb-0">Ayo dengarkan dan beri solusi untuk murid!</p>
+                                        <p class="lead fw-normal text-muted mb-0">Masuk untuk menambahkan data guru ataupun siswa</p>
                                     </div>
                                     <div class="row gx-5 justify-content-center">
                                         <div class="col-lg-8 col-xl-6">
                                             <!-- Form login guru-->
-                                            <form id="formGuru" onsubmit="validateGuruForm(event)">
+                                            <form id="formAdmin" onsubmit="validateAdminForm(event)">
                                                 <!-- Username input-->
                                                 <div class="form-floating mb-3">
-                                                    <input class="form-control" id="idguru" type="text" placeholder="Enter your ID..." required />
-                                                    <label for="idguru">ID</label>
-                                                </div>
-                                                <!-- Email address input-->
-                                                <div class="form-floating mb-3">
-                                                    <input class="form-control" id="email" type="email" placeholder="Enter your email..." required />
+                                                    <input class="form-control" id="email" type="email" placeholder="Enter your Email..." required />
                                                     <label for="email">Email</label>
                                                 </div>
                                                 <!-- Password input-->
                                                 <div class="form-floating mb-3 position-relative">
                                                     <input class="form-control" id="password" type="password" placeholder="Enter your password..." required />
                                                     <label for="password">Password</label>
-                                                    <span id="togglePasswordIconGuru" onclick="toggleGuruPassword()" style="cursor: pointer; position: absolute; right: 10px; top: 20px;"></span>
+                                                    <span id="togglePasswordIconSiswa" onclick="toggleSiswaPassword()" style="cursor: pointer; position: absolute; right: 10px; top: 20px;">👁</span>
                                                 </div>
                                                 <!-- Submit Button-->
                                                 <div class="d-grid">
@@ -89,7 +78,7 @@
         <footer class="bg-white py-4 mt-auto">
             <div class="container px-5">
                 <div class="row align-items-center justify-content-between flex-column flex-sm-row">
-                    <div class="col-auto"><div class="small m-0">Copyright &copy; Ruang Dengar 2024</div></div>
+                    <div class="col-auto"><div class="small m-0">Copyright &copy; Pasukan Bismillah Jalan, 2024</div></div>
                     <div class="col-auto">
                         <a class="small" href="#!">Privacy</a>
                         <span class="mx-1">&middot;</span>
