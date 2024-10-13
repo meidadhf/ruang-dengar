@@ -62,6 +62,10 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-floating mb-3 position-relative">
+                                <textarea class="form-control" id="replyMessage" placeholder="Ketik balasannya..." required></textarea>
+                                <label for="replyMessage">Balas Pesan</label>
+                            </div>
                         </div>
                     </div>
                 </div>

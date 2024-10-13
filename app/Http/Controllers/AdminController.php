@@ -13,7 +13,7 @@ class AdminController extends Controller
      */
     public function showLoginForm()
     {
-        return view('guru.login');
+        return view('admin.login');
     }
 
     /**

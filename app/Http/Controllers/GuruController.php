@@ -2,81 +2,121 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Guru;
 use App\Models\Pesan;
+
 class GuruController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Menampilkan formulir login.
      */
     public function showLoginForm()
     {
         return view('guru.login');
     }
 
+    /**
+     * Proses login.
+     */
     public function login(Request $request)
     {
-        $credentials = $request->only('email', 'password');
-        if (auth()->guard('guru')->attempt($credentials)) {
-            return redirect()->route('guru.dashboard');
-        }
-        return back()->withErrors(['email' => 'Email atau password salah. Silahkan isi kembali.']);
+    // Validasi data yang dimasukkan
+    $request->validate([
+        'email' => 'required|email',
+        'password' => 'required',
+    ]);
+
+    // Debugging: Cek kredensial yang diterima
+    \Log::info('Login attempt with:', $request->only('email', 'password'));
+
+    // Cek kredensial
+    if (Auth::guard('guru')->attempt($request->only('email', 'password'))) {
+        // Jika login berhasil, arahkan ke dashboard
+        return redirect()->route('guru.dashboard');
     }
 
+    // Debugging: Jika login gagal
+    \Log::warning('Login failed for:', $request->only('email'));
+    return redirect()->back()->withInput()->withErrors([
+        'email' => 'The provided credentials do not match our records.',
+    ]);
+    }
+
+    /**
+     * Menampilkan dashboard guru.
+     */
     public function dashboard()
     {
+        // Mengambil pesan yang berkaitan dengan guru yang sedang login
         $pesans = Pesan::where('guru_id', auth()->id())->get();
         return view('guru.dashboard', compact('pesans'));
     }
 
+    /**
+     * Proses logout.
+     */
+    public function logout()
+    {
+        Auth::guard('guru')->logout();
+        return redirect()->route('guru.login');
+    }
+
+    /**
+     * Proses membalas pesan.
+     */
     public function balasPesan(Request $request, $pesan_id)
     {
-        //
+        // Validasi input
+        $request->validate([
+            'isi' => 'required|string',
+        ]);
+
+        // Temukan pesan yang ingin dibalas
+        $pesan = Pesan::findOrFail($pesan_id);
+
+        // Simpan balasan
+        $pesan->balasan = $request->input('isi');
+        $pesan->guru_id = auth()->id(); // Menyimpan ID guru yang membalas
+        $pesan->save();
+
+        return redirect()->route('guru.dashboard')->with('success', 'Pesan berhasil dibalas.');
     }
-    /**
-     * Show the form for creating a new resource.
-     */
+
+    // Fungsi lainnya jika perlu
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'nama_guru' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:gurus',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        $guru = Guru::createGuru($request->all());
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         //

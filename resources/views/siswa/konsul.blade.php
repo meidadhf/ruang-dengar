@@ -51,7 +51,7 @@
                                             <h5>00504122001</h5>
                                             <p>Merupakan guru BP/BK yang bertugas di jurusan Teknik Komputer dan Jaringan (TKJ)</p>
                                         </div>
-                                        <img class="img-fluid square-image" src="assets/kosongan2.png" alt="..." style="width: 300px; height: 300px; object-fit: cover;"  />
+                                        <img class="img-fluid square-image" src="assets/bundaendang.jpg" alt="..." style="width: 300px; height: 300px; object-fit: cover;"  />
                                     </div>
                                 </div>
                             </div>
@@ -65,7 +65,7 @@
                                             <h5>00504122002</h5>
                                             <p>Merupakan guru BP/BK yang bertugas di jurusan Teknik Pemesinan (TP)</p>
                                         </div>
-                                          <img class="img-fluid square-image" src="assets/kosongan2.png" alt="..." style="width: 300px; height: 300px; object-fit: cover;"  />
+                                          <img class="img-fluid square-image" src="assets/buayu.jpg" alt="..." style="width: 300px; height: 300px; object-fit: cover;"  />
                                     </div>
                                 </div>
                             </div>
@@ -79,7 +79,7 @@
                                             <h5>00504122003</h5>
                                             <p>Merupakan guru BP/BK yang bertugas di jurusan Teknik Elektronika Industri (TEI)</p>
                                         </div>
-                                          <img class="img-fluid square-image" src="assets/kosongan2.png" alt="..." style="width: 300px; height: 300px; object-fit: cover;"  />
+                                          <img class="img-fluid square-image" src="assets/budewi.jpg" alt="..." style="width: 300px; height: 300px; object-fit: cover;"  />
                                     </div>
                                 </div>
                             </div>
@@ -93,7 +93,7 @@
                                             <h5>00504122004</h5>
                                             <p>Merupakan guru BP/BK yang bertugas di dua jurusan, yaitu Teknik Pengelasan dan Fabrikasi Logam (TPFL) dan Teknik Fabrikasi Logam dan Manufaktur (TFLM)</p>
                                         </div>
-                                          <img class="img-fluid square-image" src="assets/kosongan1.png" alt="..." style="width: 300px; height: 300px; object-fit: cover;"  />
+                                          <img class="img-fluid square-image" src="assets/paarfi.jpg" alt="..." style="width: 300px; height: 300px; object-fit: cover;"  />
                                     </div>
                                 </div>
                             </div>
@@ -107,7 +107,7 @@
                                             <h5>00504122005</h5>
                                             <p>Merupakan guru BP/BK yang bertugas di dua jurusan, yaitu Desain Gambar Mesin (DGM) dan Teknik Kendaraan Ringan (TKR)</p>
                                         </div>
-                                          <img class="img-fluid square-image" src="assets/kosongan1.png" alt="..." style="width: 300px; height: 300px; object-fit: cover;"  />
+                                          <img class="img-fluid square-image" src="assets/paagus.jpg" alt="..." style="width: 300px; height: 300px; object-fit: cover;"  />
                                     </div>
                                 </div>
                             </div>
@@ -121,7 +121,7 @@
                                             <h5>00504122006</h5>
                                             <p>Merupakan guru BP/BK yang bertugas di dua jurusan, yaitu Teknik dan Bisnis Sepeda Motor (TBSM) dan Teknik Instalasi Tenaga Listrik (TITL)</p>
                                         </div>
-                                         <img class="img-fluid square-image" src="assets/kosongan1.png" alt="..." style="width: 300px; height: 300px; object-fit: cover;"  />
+                                         <img class="img-fluid square-image" src="assets/pabadru.jpg" alt="..." style="width: 300px; height: 300px; object-fit: cover;"  />
                                     </div>
                                 </div>
                             </div>
@@ -135,7 +135,7 @@
                                             <h5>00504122007</h5>
                                             <p>Merupakan guru BP/BK yang bertugas di dua jurusan, yaitu Desain Permodelan dan Informasi Bangunan (DPIB) dan Rekayasa Perangkat Lunak (RPL)</p>
                                         </div>
-                                         <img class="img-fluid square-image" src="assets/kosongan2.png" alt="..." style="width: 300px; height: 300px; object-fit: cover;"  />
+                                         <img class="img-fluid square-image" src="assets/buputri.jpg" alt="..." style="width: 300px; height: 300px; object-fit: cover;"  />
                                     </div>
                                 </div>
                             </div>

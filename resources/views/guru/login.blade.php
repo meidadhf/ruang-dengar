@@ -27,9 +27,6 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
                             <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                            <li class="nav-item"><a class="nav-link" href="loginguru.html">Login Guru</a></li>
-                            <li class="nav-item"><a class="nav-link" href="daftarguru.html">Daftar Guru</a></li>
-                            <li class="nav-item"><a class="nav-link" href="konsul.html">Konseling</a></li>
                         </ul>
                     </div>
                 </div>
@@ -54,20 +51,21 @@
                                     <div class="row gx-5 justify-content-center">
                                         <div class="col-lg-8 col-xl-6">
                                             <!-- Form login guru-->
-                                            <form id="formGuru" onsubmit="validateGuruForm(event)">
+                                            <form id="formGuru" action="{{ route('login.guru')}}" method="POST">
+                                                @csrf
                                                 <!-- Username input-->
                                                 <div class="form-floating mb-3">
-                                                    <input class="form-control" id="idguru" type="text" placeholder="Enter your ID..." required />
+                                                    <input class="form-control" id="idguru" name="idguru" type="text" placeholder="Enter your ID..." required />
                                                     <label for="idguru">ID</label>
                                                 </div>
                                                 <!-- Email address input-->
                                                 <div class="form-floating mb-3">
-                                                    <input class="form-control" id="email" type="email" placeholder="Enter your email..." required />
+                                                    <input class="form-control" id="email" name="email" type="email" placeholder="Enter your email..." required />
                                                     <label for="email">Email</label>
                                                 </div>
                                                 <!-- Password input-->
                                                 <div class="form-floating mb-3 position-relative">
-                                                    <input class="form-control" id="password" type="password" placeholder="Enter your password..." required />
+                                                    <input class="form-control" id="password" name="password" type="password" placeholder="Enter your password..." required />
                                                     <label for="password">Password</label>
                                                     <span id="togglePasswordIconGuru" onclick="toggleGuruPassword()" style="cursor: pointer; position: absolute; right: 10px; top: 20px;"></span>
                                                 </div>
@@ -104,5 +102,33 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="{{ asset('template/js/scripts.js') }}"></script>
+        <script>
+            function validateGuruForm(event) {
+                event.preventDefault();
+
+                var id = document.getElementById("idguru").value;
+                var email = document.getElementById("email").value;
+                var password = document.getElementById("password").value;
+
+                // Cek jika semua field diisi
+                if (id === "" || email === "" || password === "") {
+                    alert("Semua field harus diisi!");
+                    event.preventDefault();
+                }
+            }
+
+            // Fungsi untuk toggle tampilan password pada form guru
+            function toggleGuruPassword() {
+                var passwordField = document.getElementById("password");
+                var toggleIcon = document.getElementById("togglePasswordIconGuru");
+                 if (passwordField.type === "password") {
+                    passwordField.type = "text";
+                    toggleIcon.innerHTML = "🙈"; // Icon untuk sembunyikan
+                } else {
+                    passwordField.type = "password";
+                    toggleIcon.innerHTML = "👁"; // Icon untuk tampilkan
+                 }
+            }
+        </script>
     </body>
 </html>

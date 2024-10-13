@@ -38,9 +38,24 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'users', // default untuk user biasa (misal, siswa yang bukan dari tabel guru atau admin)
+        ],
+        'siswa' => [
+            'driver' => 'session',  // menggunakan sesi untuk otentikasi
+            'provider' => 'siswas', // provider untuk siswa
+        ],
+        'guru' => [
+            'driver' => 'session',  // menggunakan sesi untuk otentikasi
+            'provider' => 'gurus',  // provider untuk guru
+        ],
+        'admin' => [
+            'driver' => 'session',  // menggunakan sesi untuk otentikasi
+            'provider' => 'admins', // provider untuk admin
         ],
     ],
+
+
+
 
     /*
     |--------------------------------------------------------------------------
@@ -60,16 +75,24 @@ return [
     */
 
     'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\User::class),
-        ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+    'users' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\User::class, // default untuk user
     ],
+    'siswas' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Siswa::class, // provider untuk siswa
+    ],
+    'gurus' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Guru::class, // provider untuk guru
+    ],
+    'admins' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Admin::class, // provider untuk admin
+    ],
+],
+
 
     /*
     |--------------------------------------------------------------------------

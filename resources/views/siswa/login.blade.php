@@ -93,5 +93,35 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="{{ asset('template/js/scripts.js') }}"></script>
+        <script>
+        // Fungsi untuk toggle tampilan password pada form siswa
+        function toggleSiswaPassword() {
+        var passwordField = document.getElementById("passwords");
+        var toggleIcon = document.getElementById("togglePasswordIconSiswa");
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                toggleIcon.innerHTML = "🙈"; // Icon untuk sembunyikan
+            } else {
+                passwordField.type = "password";
+                toggleIcon.innerHTML = "👁"; // Icon untuk tampilkan
+            }
+        }
+
+        // Fungsi untuk validasi form siswa
+        function validateSiswaForm(event) {
+            event.preventDefault();
+
+            var nis = document.getElementById("nis").value;
+            var passwords = document.getElementById("passwords").value;
+
+                // Cek jika semua field diisi
+                if (nis === "" || passwords === "") {
+                    alert("Semua field harus diisi!");
+                } else {
+                    // Jika valid, arahkan ke balasan.html
+                    window.location.href = "siswa.dashboard";
+                }
+            }
+        </script>
     </body>
 </html>

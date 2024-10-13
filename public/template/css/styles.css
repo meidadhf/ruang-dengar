@@ -1295,8 +1295,9 @@ progress {
     width: 58.33333333%;
   }
   .col-lg-8 {
-    flex: 0 0 auto;
-    width: 66.66666667%;
+    display: flex;
+    justify-content: center; /* Pusat secara horizontal */
+    align-items: center; /* Pusat secara vertikal */
   }
   .col-lg-9 {
     flex: 0 0 auto;
