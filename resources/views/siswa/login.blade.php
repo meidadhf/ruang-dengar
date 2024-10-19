@@ -119,7 +119,7 @@
                     alert("Semua field harus diisi!");
                 } else {
                     // Jika valid, arahkan ke balasan.html
-                    window.location.href = "siswa.dashboard";
+                    window.location.href = "{{ route('siswa.dashboard') }}";
                 }
             }
         </script>

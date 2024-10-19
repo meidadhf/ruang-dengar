@@ -8,8 +8,8 @@
                     <div class="fs-3 fw-light text-muted">We can help your problems</div>
                     <h1 class="display-3 fw-bolder mb-5"><span class="text-gradient d-inline">Ayo mulai konseling!</span></h1>
                     <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xxl-start mb-3">
-                        <a class="btn btn-outline-dark btn-lg px-5 py-3 fs-6 fw-bolder" href="{{ route('login.siswa') }}">Login Siswa</a>
-                        <a class="btn btn-outline-dark btn-lg px-5 py-3 fs-6 fw-bolder" href="{{ route('login.guru') }}">Login Guru</a>
+                        <a class="btn btn-outline-dark btn-lg px-5 py-3 fs-6 fw-bolder" href="{{ route('siswa.login') }}">Login Siswa</a>
+                        <a class="btn btn-outline-dark btn-lg px-5 py-3 fs-6 fw-bolder" href="{{ route('guru.login') }}">Login Guru</a>
                     </div>
                 </div>
             </div>

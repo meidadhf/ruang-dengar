@@ -16,30 +16,32 @@ class Authenticate
      * @return string|null
      */
     protected function redirectTo($request)
-    {
-        if (! $request->expectsJson()) {
-            if ($request->is('guru/*')) {
-                return route('login.guru');
-            } elseif ($request->is('admin/*')) {
-                return route('login.admin');
-            } else {
-                return route('login.siswa');
-            }
+{
+    if (! $request->expectsJson()) {
+        if ($request->is('/dashboard')) {
+            return route('.siswa');
+        } elseif ($request->is('/dashboard')) {
+            return route('.guru');
+        } elseif ($request->is('/dashboard')) {
+            return route('.admin');
         }
+
+        return route('home'); // Default jika tidak ada segment cocok
     }
+}
 
     public function handle(Request $request, Closure $next): Response
     {
         // Memeriksa apakah pengguna terautentikasi
-        if (! Auth::guard('guru')->check() && $request->is('guru/*')) {
+        if (! Auth::guard('guru')->check() && $request->is('guru/dashboard')) {
             return redirect($this->redirectTo($request));
         }
 
-        if (! Auth::guard('admin')->check() && $request->is('admin/*')) {
+        if (! Auth::guard('admin')->check() && $request->is('admin/dashboard')) {
             return redirect($this->redirectTo($request));
         }
 
-        if (! Auth::guard('siswa')->check() && $request->is('siswa/*')) {
+        if (! Auth::guard('siswa')->check() && $request->is('siswa/dashboard')) {
             return redirect($this->redirectTo($request));
         }
 

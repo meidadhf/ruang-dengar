@@ -22,26 +22,26 @@ class GuruController extends Controller
      */
     public function login(Request $request)
     {
-    // Validasi data yang dimasukkan
-    $request->validate([
-        'email' => 'required|email',
-        'password' => 'required',
-    ]);
+        // Validasi data yang dimasukkan
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
 
-    // Debugging: Cek kredensial yang diterima
-    \Log::info('Login attempt with:', $request->only('email', 'password'));
+        // Debugging: Cek kredensial yang diterima
+        \Log::info('Login attempt with:', $request->only('email', 'password'));
 
-    // Cek kredensial
-    if (Auth::guard('guru')->attempt($request->only('email', 'password'))) {
-        // Jika login berhasil, arahkan ke dashboard
-        return redirect()->route('guru.dashboard');
-    }
+        // Cek kredensial
+        if (Auth::guard('guru')->attempt($request->only('email', 'password'))) {
+            // Jika login berhasil, arahkan ke dashboard
+            return redirect()->route('guru.dashboard');
+        }
 
-    // Debugging: Jika login gagal
-    \Log::warning('Login failed for:', $request->only('email'));
-    return redirect()->back()->withInput()->withErrors([
-        'email' => 'The provided credentials do not match our records.',
-    ]);
+        // Debugging: Jika login gagal
+        \Log::warning('Login failed for:', $request->only('email'));
+        return redirect()->back()->withInput()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ]);
     }
 
     /**
@@ -52,6 +52,25 @@ class GuruController extends Controller
         // Mengambil pesan yang berkaitan dengan guru yang sedang login
         $pesans = Pesan::where('guru_id', auth()->id())->get();
         return view('guru.dashboard', compact('pesans'));
+    }
+
+    /**
+     * Menampilkan daftar guru.
+     */
+    public function daftarGuru()
+    {
+        // Ambil semua guru
+        $gurus = Guru::all(); // Pastikan model Guru sudah terisi dengan data yang benar
+        return view('siswa.dashboard', compact('gurus')); // Mengarahkan ke view siswa.dashboard
+    }
+
+    /**
+     * Proses konsul.
+     */
+    public function konsul(Request $request, $guruId)
+    {
+        // Di sini Anda bisa menangani logika untuk konsul, misalnya menyimpan data ke database
+        return redirect()->route('konsul.page', ['guruId' => $guruId]); // Mengarahkan ke halaman konsul
     }
 
     /**

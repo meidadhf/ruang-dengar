@@ -1,41 +1,58 @@
-    <?php
+<?php
 
-    use App\Http\Controllers\SiswaController;
-    use App\Http\Controllers\GuruController;
-    use App\Http\Controllers\AdminController;
-    use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\GuruController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Auth\LoginController;
 
-    // Home route
-    Route::get('/', [HomeController::class, 'index'])->name('home');
+// Home route
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-    // Route untuk login siswa
-    Route::get('/siswa/login', [SiswaController::class, 'showLoginForm'])->name('login.siswa');
-    Route::post('/siswa/login', [SiswaController::class, 'login']);
+// Route untuk halaman pemilihan role login (siswa, guru, atau admin)
+Route::get('/login', function () {
+    return view('auth.choose-login');
+})->name('login')->middleware('guest');
 
-    Route::middleware('auth:siswa')->group(function () {
-        Route::get('/siswa/dashboard', [SiswaController::class, 'dashboard'])->name('siswa.dashboard');
-        Route::get('/siswa/guru', [SiswaController::class, 'listGuru'])->name('siswa.list-guru');
-        Route::post('/siswa/guru/{guru_id}/kirim', [SiswaController::class, 'kirimPesan'])->name('siswa.kirim-pesan');
-        Route::get('/siswa/balasan', [SiswaController::class, 'lihatBalasan'])->name('siswa.lihat-balasan');
-    });
+// Route untuk login siswa
+Route::get('/siswa/login', [SiswaController::class, 'showLoginForm'])->name('siswa.login');
+Route::post('/siswa/login', [SiswaController::class, 'loginSiswa'])->name('siswa.login.submit');
 
-    // Route untuk login guru
-    Route::get('/guru/login', [GuruController::class, 'showLoginForm'])->name('login.guru');
-    Route::post('/guru/login', [GuruController::class, 'login']);
-    Route::middleware('auth:guru')->group(function () {
-        Route::get('/guru/dashboard', [GuruController::class, 'dashboard'])->name('guru.dashboard');
-        Route::post('/guru/pesan/{pesan_id}/balas', [GuruController::class, 'balasPesan'])->name('guru.balas-pesan');
-    });
+//Route dahboard
+Route::get('/dashboard', [SiswaController::class, 'showDashboard'])->name('siswa.dashboard');
 
-    // Route untuk login admin
-    Route::get('/admin/login', [AdminController::class, 'showLoginForm'])->name('login.admin');
-    Route::post('/admin/login', [AdminController::class, 'login']);
-    Route::middleware('auth:admin')->group(function () {
-        Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-        Route::get('/admin/guru/create', [AdminController::class, 'createGuruForm'])->name('admin.create-guru');
-        Route::post('/admin/guru/store', [AdminController::class, 'storeGuru'])->name('admin.store-guru');
-        Route::get('/admin/siswa/create', [AdminController::class, 'createSiswaForm'])->name('admin.create-siswa');
-        Route::post('/admin/siswa/store', [AdminController::class, 'storeSiswa'])->name('admin.store-siswa');
-        Route::delete('/admin/guru/{id}', [AdminController::class, 'deleteGuru'])->name('admin.delete-guru');
-        Route::delete('/admin/siswa/{id}', [AdminController::class, 'deleteSiswa'])->name('admin.delete-siswa');
-    });
+// Route dashboard siswa dengan middleware auth
+Route::get('/siswa/dashboard', [SiswaController::class, 'showDashboard'])->name('siswa.dashboard');
+
+//Route untuk konsul
+Route::get('/siswa/konsul', [SiswaController::class, 'konsul'])->name('siswa.konsul');
+Route::post('/pesan/kirim', [PesanController::class, 'kirim'])->name('pesan.kirim');
+
+Route::get('/siswa/guru', [SiswaController::class, 'listGuru'])->name('siswa.list-guru')->middleware('auth:siswa');
+Route::post('/siswa/guru/{guru_id}/kirim', [SiswaController::class, 'kirimPesan'])->name('siswa.kirim-pesan')->middleware('auth:siswa');
+Route::get('/siswa/balasan', [SiswaController::class, 'lihatBalasan'])->name('siswa.lihat-balasan')->middleware('auth:siswa');
+
+// Route untuk login guru
+Route::get('/guru/login', [GuruController::class, 'showLoginForm'])->name('guru.login')->middleware('guest');
+Route::post('/guru/login', [GuruController::class, 'loginGuru'])->name('guru.login.submit');
+
+// Route dashboard guru dengan middleware auth
+Route::get('/guru/dashboard', [GuruController::class, 'dashboard'])->name('guru.dashboard')->middleware('auth:guru');
+Route::post('/guru/pesan/{pesan_id}/balas', [GuruController::class, 'balasPesan'])->name('guru.balas-pesan')->middleware('auth:guru');
+
+// Route untuk login admin
+Route::get('/admin/login', [AdminController::class, 'showLoginForm'])->name('admin.login')->middleware('guest');
+Route::post('/admin/login', [AdminController::class, 'loginAdmin'])->name('admin.login.submit');
+
+// Route dashboard admin dengan middleware auth
+Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard')->middleware('auth:admin');
+Route::get('/admin/guru/create', [AdminController::class, 'createGuruForm'])->name('admin.create-guru')->middleware('auth:admin');
+Route::post('/admin/guru/store', [AdminController::class, 'storeGuru'])->name('admin.store-guru')->middleware('auth:admin');
+Route::get('/admin/siswa/create', [AdminController::class, 'createSiswaForm'])->name('admin.create-siswa')->middleware('auth:admin');
+Route::post('/admin/siswa/store', [AdminController::class, 'storeSiswa'])->name('admin.store-siswa')->middleware('auth:admin');
+Route::delete('/admin/guru/{id}', [AdminController::class, 'deleteGuru'])->name('admin.delete-guru')->middleware('auth:admin');
+Route::delete('/admin/siswa/{id}', [AdminController::class, 'deleteSiswa'])->name('admin.delete-siswa')->middleware('auth:admin');
+
+// Route default login (untuk fallback)
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [LoginController::class, 'login']);

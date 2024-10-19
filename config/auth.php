@@ -34,27 +34,32 @@ return [
     | Supported: "session"
     |
     */
-
-    'guards' => [
-        'web' => [
-            'driver' => 'session',
-            'provider' => 'users', // default untuk user biasa (misal, siswa yang bukan dari tabel guru atau admin)
-        ],
-        'siswa' => [
-            'driver' => 'session',  // menggunakan sesi untuk otentikasi
-            'provider' => 'siswas', // provider untuk siswa
-        ],
-        'guru' => [
-            'driver' => 'session',  // menggunakan sesi untuk otentikasi
-            'provider' => 'gurus',  // provider untuk guru
-        ],
-        'admin' => [
-            'driver' => 'session',  // menggunakan sesi untuk otentikasi
-            'provider' => 'admins', // provider untuk admin
-        ],
+'guards' => [
+    'siswa' => [
+        'driver' => 'session',
+        'provider' => 'siswas',
     ],
+    // guard lain seperti 'guru', 'admin', dsb.
+],
+
+'providers' => [
+    'siswas' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Siswa::class,
+    ],
+    // provider lainnya
+],
 
 
+
+    'gurus' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Guru::class,
+    ],
+    'admins' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Admin::class,
+    ],
 
 
     /*
