@@ -26,7 +26,7 @@
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
-                        
+
                         </ul>
                     </div>
                 </div>
@@ -41,111 +41,109 @@
                         <div class="col-lg-11 col-xl-9 col-xxl-8">
                             <!-- Project Card 1-->
                             <div class="card overflow-hidden shadow rounded-4 border-0 mb-5">
-    <div class="card-body p-0">
-        <div class="d-flex align-items-center">
-            <div class="p-5">
-                <h2 class="fw-bolder">Dra. Endang Dwi Winarti</h2>
-                <h5>00504122001</h5>
-                <p>Merupakan guru BP/BK yang bertugas di jurusan Teknik Komputer dan Jaringan (TKJ)</p>
-                <!-- Konsul Button -->
-                <a href="{{ route('siswa.konsul') }}" class="btn btn-primary">Konsul</a>
-            </div>
-            <img class="img-fluid square-image" src="{{ asset('template/images/bundaendang.jpg') }}" alt="..." style="width: 300px; height: 300px; object-fit: cover;" />
-        </div>
-    </div>
-</div>
+                                <div class="card-body p-0">
+                                    <div class="d-flex align-items-center">
+                                        <div class="p-5">
+                                            <h2 class="fw-bolder">Dra. Endang Dwi Winarti</h2>
+                                            <h5>00504122001</h5>
+                                            <p>Merupakan guru BP/BK yang bertugas di jurusan Teknik Komputer dan Jaringan (TKJ)</p>
+                                            <!-- Konsul Button -->
+                                            <a href="{{ route('siswa.konsul', ['guru_id' => '00504122001', 'nama_guru' => 'Dra. Endang Dwi Winarti']) }}" class="btn btn-primary">Konsul</a>
+                                        </div>
+                                            <img class="img-fluid square-image" src="{{ asset('template/images/bundaendang.jpg') }}" alt="..." style="width: 300px; height: 300px; object-fit: cover;" />
+                                    </div>
+                                </div>
+                            </div>
 
+                            <!-- Project Card 2 -->
+                            <div class="card overflow-hidden shadow rounded-4 border-0 mb-4">
+                                <div class="card-body p-0">
+                                    <div class="d-flex align-items-center">
+                                        <div class="p-5">
+                                            <h2 class="fw-bolder">Ayu Lea Lailatussadiyah, S.Pd.</h2>
+                                            <h5>00504122002</h5>
+                                            <p>Merupakan guru BP/BK yang bertugas di jurusan Teknik Pemesinan (TP)</p>
+                                            <a href="{{ route('siswa.konsul', ['guru_id' => '00504122002', 'nama_guru' => 'Ayu Lea Lailatussadiyah, S.Pd.']) }}" class="btn btn-primary">Konsul</a>
+                                        </div>
+                                            <img class="img-fluid square-image" src="{{ asset('template/images/buayu.jpg') }}" alt="..." style="width: 300px; height: 300px; object-fit: cover;" />
+                                    </div>
+                                </div>
+                            </div>
 
-                         <!-- Project Card 2 -->
-<div class="card overflow-hidden shadow rounded-4 border-0 mb-4">
-    <div class="card-body p-0">
-        <div class="d-flex align-items-center">
-            <div class="p-5">
-                <h2 class="fw-bolder">Ayu Lea Lailatussa'diyah, S.Pd.</h2>
-                <h5>00504122002</h5>
-                <p>Merupakan guru BP/BK yang bertugas di jurusan Teknik Pemesinan (TP)</p>
-                <a href="{{ route('siswa.konsul') }}" class="btn btn-primary">Konsul</a>
-            </div>
-            <img class="img-fluid square-image" src="{{ asset('template/images/buayu.jpg') }}" alt="..." style="width: 300px; height: 300px; object-fit: cover;" />
-        </div>
-    </div>
-</div>
+                            <!-- Project Card 3 -->
+                            <div class="card overflow-hidden shadow rounded-4 border-0 mb-4">
+                                <div class="card-body p-0">
+                                    <div class="d-flex align-items-center">
+                                        <div class="p-5">
+                                            <h2 class="fw-bolder">Raden Dewi Noviyanti, S.Pd.</h2>
+                                            <h5>00504122003</h5>
+                                            <p>Merupakan guru BP/BK yang bertugas di jurusan Teknik Elektronika Industri (TEI)</p>
+                                            <a href="{{ route('siswa.konsul', ['guru_id' => '00504122003', 'nama_guru' => 'Raden Dewi Noviyanti, S.Pd.']) }}" class="btn btn-primary">Konsul</a>
+                                        </div>
+                                        <img class="img-fluid square-image" src="{{ asset('template/images/budewi.jpg') }}" alt="..." style="width: 300px; height: 300px; object-fit: cover;" />
+                                    </div>
+                                </div>
+                            </div>
 
-<!-- Project Card 3 -->
-<div class="card overflow-hidden shadow rounded-4 border-0 mb-4">
-    <div class="card-body p-0">
-        <div class="d-flex align-items-center">
-            <div class="p-5">
-                <h2 class="fw-bolder">Raden Dewi Noviyanti, S.Pd.</h2>
-                <h5>00504122003</h5>
-                <p>Merupakan guru BP/BK yang bertugas di jurusan Teknik Elektronika Industri (TEI)</p>
-                <a href="{{ route('siswa.konsul') }}" class="btn btn-primary">Konsul</a>
-            </div>
-            <img class="img-fluid square-image" src="{{ asset('template/images/budewi.jpg') }}" alt="..." style="width: 300px; height: 300px; object-fit: cover;" />
-        </div>
-    </div>
-</div>
+                            <!-- Project Card 4 -->
+                            <div class="card overflow-hidden shadow rounded-4 border-0 mb-4">
+                                <div class="card-body p-0">
+                                    <div class="d-flex align-items-center">
+                                        <div class="p-5">
+                                            <h2 class="fw-bolder">Arfiansyah, S.Pd.</h2>
+                                            <h5>00504122004</h5>
+                                            <p>Merupakan guru BP/BK yang bertugas di dua jurusan, yaitu Teknik Pengelasan dan Fabrikasi Logam (TPFL) dan Teknik Fabrikasi Logam dan Manufaktur (TFLM)</p>
+                                            <a href="{{ route('siswa.konsul', ['guru_id' => '00504122004', 'nama_guru' => 'Arfiansyah, S.Pd.']) }}" class="btn btn-primary">Konsul</a>
+                                        </div>
+                                        <img class="img-fluid square-image" src="{{ asset('template/images/paarfi.jpg') }}" alt="..." style="width: 300px; height: 300px; object-fit: cover;" />
+                                    </div>
+                                </div>
+                            </div>
 
-<!-- Project Card 4 -->
-<div class="card overflow-hidden shadow rounded-4 border-0 mb-4">
-    <div class="card-body p-0">
-        <div class="d-flex align-items-center">
-            <div class="p-5">
-                <h2 class="fw-bolder">Arfiansyah, S.Pd.</h2>
-                <h5>00504122004</h5>
-                <p>Merupakan guru BP/BK yang bertugas di dua jurusan, yaitu Teknik Pengelasan dan Fabrikasi Logam (TPFL) dan Teknik Fabrikasi Logam dan Manufaktur (TFLM)</p>
-                <a href="{{ route('siswa.konsul') }}" class="btn btn-primary">Konsul</a>
-            </div>
-            <img class="img-fluid square-image" src="{{ asset('template/images/paarfi.jpg') }}" alt="..." style="width: 300px; height: 300px; object-fit: cover;" />
-        </div>
-    </div>
-</div>
+                            <!-- Project Card 5 -->
+                            <div class="card overflow-hidden shadow rounded-4 border-0 mb-4">
+                                <div class="card-body p-0">
+                                    <div class="d-flex align-items-center">
+                                        <div class="p-5">
+                                            <h2 class="fw-bolder">Agus Dian Kusdiana, S.Pd.</h2>
+                                            <h5>00504122005</h5>
+                                            <p>Merupakan guru BP/BK yang bertugas di dua jurusan, yaitu Desain Gambar Mesin (DGM) dan Teknik Kendaraan Ringan (TKR)</p>
+                                            <a href="{{ route('siswa.konsul', ['guru_id' => '00504122005', 'nama_guru' => 'Agus Dian Kusdiana, S.Pd.']) }}" class="btn btn-primary">Konsul</a>
+                                        </div>
+                                        <img class="img-fluid square-image" src="{{ asset('template/images/paagus.jpg') }}" alt="..." style="width: 300px; height: 300px; object-fit: cover;" />
+                                    </div>
+                                </div>
+                            </div>
 
-<!-- Project Card 5 -->
-<div class="card overflow-hidden shadow rounded-4 border-0 mb-4">
-    <div class="card-body p-0">
-        <div class="d-flex align-items-center">
-            <div class="p-5">
-                <h2 class="fw-bolder">Agus Dian Kusdiana, S.Pd.</h2>
-                <h5>00504122005</h5>
-                <p>Merupakan guru BP/BK yang bertugas di dua jurusan, yaitu Desain Gambar Mesin (DGM) dan Teknik Kendaraan Ringan (TKR)</p>
-                <a href="{{ route('siswa.konsul') }}" class="btn btn-primary">Konsul</a>
-            </div>
-            <img class="img-fluid square-image" src="{{ asset('template/images/paagus.jpg') }}" alt="..." style="width: 300px; height: 300px; object-fit: cover;" />
-        </div>
-    </div>
-</div>
+                            <!-- Project Card 6 -->
+                            <div class="card overflow-hidden shadow rounded-4 border-0 mb-4">
+                                <div class="card-body p-0">
+                                    <div class="d-flex align-items-center">
+                                        <div class="p-5">
+                                            <h2 class="fw-bolder">Dede Badru Zaman, S.Sos.</h2>
+                                            <h5>00504122006</h5>
+                                            <p>Merupakan guru BP/BK yang bertugas di dua jurusan, yaitu Teknik dan Bisnis Sepeda Motor (TBSM) dan Teknik Instalasi Tenaga Listrik (TITL)</p>
+                                            <a href="{{ route('siswa.konsul', ['guru_id' => '00504122006', 'nama_guru' => 'Dede Badru Zaman, S.Sos.']) }}" class="btn btn-primary">Konsul</a>
+                                        </div>
+                                        <img class="img-fluid square-image" src="{{ asset('template/images/pabadru.jpg') }}" alt="..." style="width: 300px; height: 300px; object-fit: cover;" />
+                                    </div>
+                                </div>
+                            </div>
 
-<!-- Project Card 6 -->
-<div class="card overflow-hidden shadow rounded-4 border-0 mb-4">
-    <div class="card-body p-0">
-        <div class="d-flex align-items-center">
-            <div class="p-5">
-                <h2 class="fw-bolder">Dede Badru Zaman, S.Sos.</h2>
-                <h5>00504122006</h5>
-                <p>Merupakan guru BP/BK yang bertugas di dua jurusan, yaitu Teknik dan Bisnis Sepeda Motor (TBSM) dan Teknik Instalasi Tenaga Listrik (TITL)</p>
-                <a href="{{ route('siswa.konsul') }}" class="btn btn-primary">Konsul</a>
-            </div>
-            <img class="img-fluid square-image" src="{{ asset('template/images/pabadru.jpg') }}" alt="..." style="width: 300px; height: 300px; object-fit: cover;" />
-        </div>
-    </div>
-</div>
-
-<!-- Project Card 7 -->
-<div class="card overflow-hidden shadow rounded-4 border-0 mb-4">
-    <div class="card-body p-0">
-        <div class="d-flex align-items-center">
-            <div class="p-5">
-                <h2 class="fw-bolder">Putri Mardatila, S.Psi.</h2>
-                <h5>00504122007</h5>
-                <p>Merupakan guru BP/BK yang bertugas di dua jurusan, yaitu Desain Permodelan dan Informasi Bangunan (DPIB) dan Rekayasa Perangkat Lunak (RPL)</p>
-                <a href="{{ route('siswa.konsul') }}" class="btn btn-primary">Konsul</a>
-            </div>
-            <img class="img-fluid square-image" src="{{ asset('template/images/buputri.jpg') }}" alt="..." style="width: 300px; height: 300px; object-fit: cover;" />
-        </div>
-    </div>
-</div>
-
+                            <!-- Project Card 7 -->
+                            <div class="card overflow-hidden shadow rounded-4 border-0 mb-4">
+                                <div class="card-body p-0">
+                                    <div class="d-flex align-items-center">
+                                        <div class="p-5">
+                                            <h2 class="fw-bolder">Putri Mardatila, S.Psi.</h2>
+                                            <h5>00504122007</h5>
+                                            <p>Merupakan guru BP/BK yang bertugas di dua jurusan, yaitu Desain Permodelan dan Informasi Bangunan (DPIB) dan Rekayasa Perangkat Lunak (RPL)</p>
+                                            <a href="{{ route('siswa.konsul', ['guru_id' => '00504122007', 'nama_guru' => 'Putri Mardatila, S.Psi.']) }}" class="btn btn-primary">Konsul</a>
+                                        </div>
+                                        <img class="img-fluid square-image" src="{{ asset('template/images/buputri.jpg') }}" alt="..." style="width: 300px; height: 300px; object-fit: cover;" />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

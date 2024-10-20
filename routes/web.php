@@ -5,6 +5,7 @@ use App\Http\Controllers\GuruController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\PesanController;
 
 // Home route
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -25,7 +26,7 @@ Route::get('/dashboard', [SiswaController::class, 'showDashboard'])->name('siswa
 Route::get('/siswa/dashboard', [SiswaController::class, 'showDashboard'])->name('siswa.dashboard');
 
 //Route untuk konsul
-Route::get('/siswa/konsul', [SiswaController::class, 'konsul'])->name('siswa.konsul');
+Route::get('/konsul/{guru_id}/{nama_guru}', [SiswaController::class, 'konsul'])->name('siswa.konsul');
 Route::post('/pesan/kirim', [PesanController::class, 'kirim'])->name('pesan.kirim');
 
 Route::get('/siswa/guru', [SiswaController::class, 'listGuru'])->name('siswa.list-guru')->middleware('auth:siswa');

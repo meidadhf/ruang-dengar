@@ -9,6 +9,25 @@ class PesanController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function kirim(Request $request)
+    {
+        // Validasi input
+        $request->validate([
+            'guru_id' => 'required',
+            'pesan' => 'required|string',
+        ]);
+
+        // Simpan pesan konsultasi (ini contoh, sesuaikan dengan model yang kamu gunakan)
+        \App\Models\Pesan::create([
+            'guru_id' => $request->guru_id,
+            'pesan' => $request->pesan,
+            // Tambahkan atribut lain jika diperlukan, seperti siswa_id atau waktu pengiriman
+        ]);
+
+        // Redirect setelah pesan berhasil dikirim
+        return redirect()->back()->with('success', 'Pesan berhasil dikirim!');
+    }
+
     public function index()
     {
         //

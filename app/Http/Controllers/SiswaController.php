@@ -47,15 +47,18 @@ class SiswaController extends Controller
     {
         return view('siswa.dashboard');
     }
-    
+
     /**
      * Menampilkan halaman konsul
      */
 
-     public function konsul()
-     {
-         return view('siswa.konsul');
-     }
+    public function konsul($guru_id, $nama_guru)
+    {
+         // Kirim data guru ke view
+         return view('siswa.konsul', compact('guru_id', 'nama_guru'));
+    }
+
+
     /**
      * Mengirim pesan ke guru untuk konsultasi.
      */

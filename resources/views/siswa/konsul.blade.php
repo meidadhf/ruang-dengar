@@ -47,40 +47,29 @@
                             <div class="col-lg-8 col-xl-6">
                                 <form id="contactForm" method="POST" action="{{ route('pesan.kirim') }}">
                                     @csrf
-                                    <!-- Nama Guru input-->
+                                    <!-- Nama Guru (Hidden Input) -->
+                                    <input type="hidden" name="guru_id" value="{{ $guru_id }}">
+                                    <input type="hidden" name="nama_guru" value="{{ $nama_guru }}">
+
+                                    <!-- Tampilkan nama guru secara terbuka -->
                                     <div class="form-floating mb-3">
-                                        <select class="form-select" id="name" name="guru_id" required>
-                                            <option value="">Pilih Guru</option>
-                                            <option value="00504122001">Guru 1 (00504122001)</option>
-                                            <option value="00504122002">Guru 2 (00504122002)</option>
-                                            <option value="00504122003">Guru 3 (00504122003)</option>
-                                            <option value="00504122004">Guru 4 (00504122004)</option>
-                                            <option value="00504122005">Guru 5 (00504122005)</option>
-                                            <option value="00504122006">Guru 6 (00504122006)</option>
-                                            <option value="00504122007">Guru 7 (00504122007)</option>
-                                        </select>
+                                        <input type="text" class="form-control" id="name" value="{{ $nama_guru }}" readonly>
                                         <label for="name">Nama Guru</label>
-                                        <div class="invalid-feedback">Nama guru diperlukan.</div>
                                     </div>
-                                    <!-- Pesan input-->
+
+                                    <!-- Pesan input -->
                                     <div class="form-floating mb-3">
-                                        <textarea class="form-control" id="message" name="pesan" placeholder="Ketik pesanmu disini..." style="height:20rem" required></textarea>
+                                        <textarea class="form-control" id="message" name="pesan" placeholder="Ketik pesanmu di sini..." style="height: 20rem" required></textarea>
                                         <label for="message">Pesan</label>
                                         <div class="invalid-feedback">Pesan diperlukan.</div>
                                     </div>
-                                    <!-- Submit success message-->
-                                    <div class="d-none" id="submitSuccessMessage">
-                                        <div class="text-center mb-3">
-                                            <div class="fw-bolder">Pesan Berhasil Terkirim</div>
-                                            Tunggu Guru Untuk Merespon Pesan!
-                                            <br />
-                                        </div>
+
+                                    <!-- Submit Button -->
+                                    <div class="d-grid">
+                                        <button class="btn btn-primary btn-lg" type="submit">Kirim Pesan</button>
                                     </div>
-                                    <!-- Submit error message-->
-                                    <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
-                                    <!-- Submit Button-->
-                                    <div class="d-grid"><button class="btn btn-primary btn-lg" type="submit">Submit</button></div>
                                 </form>
+
                             </div>
                         </div>
                     </div>
