@@ -7,7 +7,7 @@
         <meta name="author" content="" />
         <title>Ruang Dengar - Ayo Konseling Tanpa Diketahui!</title>
         <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="{{ asset('assets/rd.ico') }}" />
+        <link rel="icon" type="image/x-icon" href="{{ asset('template/rd.ico') }}" />
         <!-- Custom Google font-->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -67,6 +67,13 @@
                                     <!-- Submit Button -->
                                     <div class="d-grid">
                                         <button class="btn btn-primary btn-lg" type="submit">Kirim Pesan</button>
+                                    </div>
+                                    <div class="d-none" id="submitSuccessMessage">
+                                        <div class="text-center mb-3">
+                                            <div class="fw-bolder">Pesan Berhasil Terkirim</div>
+                                            Tunggu Guru Untuk Merespon Pesan!
+                                            <br />
+                                        </div>
                                     </div>
                                 </form>
 

@@ -34,31 +34,16 @@ return [
     | Supported: "session"
     |
     */
-'guards' => [
-    'siswa' => [
-        'driver' => 'session',
-        'provider' => 'siswas',
-    ],
-    // guard lain seperti 'guru', 'admin', dsb.
-],
+    'guards' => [
+        'web' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
 
-'providers' => [
-    'siswas' => [
-        'driver' => 'eloquent',
-        'model' => App\Models\Siswa::class,
-    ],
-    // provider lainnya
-],
-
-
-
-    'gurus' => [
-        'driver' => 'eloquent',
-        'model' => App\Models\Guru::class,
-    ],
-    'admins' => [
-        'driver' => 'eloquent',
-        'model' => App\Models\Admin::class,
+        'guru' => [
+            'driver' => 'session',
+            'provider' => 'gurus', // Provider untuk guru
+        ],
     ],
 
 
@@ -80,23 +65,16 @@ return [
     */
 
     'providers' => [
-    'users' => [
-        'driver' => 'eloquent',
-        'model' => App\Models\User::class, // default untuk user
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
+        ],
+
+        'gurus' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Guru::class, // Model untuk guru
+        ],
     ],
-    'siswas' => [
-        'driver' => 'eloquent',
-        'model' => App\Models\Siswa::class, // provider untuk siswa
-    ],
-    'gurus' => [
-        'driver' => 'eloquent',
-        'model' => App\Models\Guru::class, // provider untuk guru
-    ],
-    'admins' => [
-        'driver' => 'eloquent',
-        'model' => App\Models\Admin::class, // provider untuk admin
-    ],
-],
 
 
     /*

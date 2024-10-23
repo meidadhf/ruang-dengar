@@ -7,7 +7,7 @@
         <meta name="author" content="" />
         <title>Ruang Dengar - Ayo Konseling Tanpa Diketahui!</title>
         <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="public/template/rd.ico" />
+        <link rel="icon" type="image/x-icon" href="{{ asset('template/rd.ico') }}" />
         <!-- Custom Google font-->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -58,7 +58,7 @@
                                                 <div class="form-floating mb-3 position-relative">
                                                     <input class="form-control" id="passwords" type="password" placeholder="Enter your password..." required />
                                                     <label for="passwords">Password</label>
-                                                    <span id="togglePasswordIconSiswa" onclick="toggleSiswaPassword()" style="cursor: pointer; position: absolute; right: 10px; top: 20px;">👁</span>
+                                                    <span id="togglePasswordIconSiswa" onclick="toggleSiswaPassword()" style="cursor: pointer; position: absolute; right: 10px; top: 20px;" class="bi bi-eye"></span>
                                                 </div>
                                                 <!-- Submit Button-->
                                                 <div class="d-grid">
@@ -95,31 +95,18 @@
         <script src="{{ asset('template/js/scripts.js') }}"></script>
         <script>
         // Fungsi untuk toggle tampilan password pada form siswa
-        function toggleSiswaPassword() {
-        var passwordField = document.getElementById("passwords");
-        var toggleIcon = document.getElementById("togglePasswordIconSiswa");
-            if (passwordField.type === "password") {
-                passwordField.type = "text";
-                toggleIcon.innerHTML = "🙈"; // Icon untuk sembunyikan
-            } else {
-                passwordField.type = "password";
-                toggleIcon.innerHTML = "👁"; // Icon untuk tampilkan
-            }
-        }
+            function toggleSiswaPassword() {
+                var passwordField = document.getElementById("passwords");
+                var toggleIcon = document.getElementById("togglePasswordIconSiswa");
 
-        // Fungsi untuk validasi form siswa
-        function validateSiswaForm(event) {
-            event.preventDefault();
-
-            var nis = document.getElementById("nis").value;
-            var passwords = document.getElementById("passwords").value;
-
-                // Cek jika semua field diisi
-                if (nis === "" || passwords === "") {
-                    alert("Semua field harus diisi!");
+                if (passwordField.type === "password") {
+                    passwordField.type = "text";
+                    toggleIcon.classList.remove('bi-eye');
+                    toggleIcon.classList.add('bi-eye-slash');
                 } else {
-                    // Jika valid, arahkan ke balasan.html
-                    window.location.href = "{{ route('siswa.dashboard') }}";
+                    passwordField.type = "password";
+                    toggleIcon.classList.remove('bi-eye-slash');
+                    toggleIcon.classList.add('bi-eye');
                 }
             }
         </script>

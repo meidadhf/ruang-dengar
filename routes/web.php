@@ -34,11 +34,12 @@ Route::post('/siswa/guru/{guru_id}/kirim', [SiswaController::class, 'kirimPesan'
 Route::get('/siswa/balasan', [SiswaController::class, 'lihatBalasan'])->name('siswa.lihat-balasan')->middleware('auth:siswa');
 
 // Route untuk login guru
-Route::get('/guru/login', [GuruController::class, 'showLoginForm'])->name('guru.login')->middleware('guest');
-Route::post('/guru/login', [GuruController::class, 'loginGuru'])->name('guru.login.submit');
+Route::get('/guru/login', [GuruController::class, 'showLoginForm'])->name('guru.login');
+Route::post('/guru/login', [GuruController::class, 'login'])->name('guru.login.submit');
+
 
 // Route dashboard guru dengan middleware auth
-Route::get('/guru/dashboard', [GuruController::class, 'dashboard'])->name('guru.dashboard')->middleware('auth:guru');
+Route::get('/guru/dashboard', [GuruController::class, 'dashboard'])->name('guru.dashboard');
 Route::post('/guru/pesan/{pesan_id}/balas', [GuruController::class, 'balasPesan'])->name('guru.balas-pesan')->middleware('auth:guru');
 
 // Route untuk login admin

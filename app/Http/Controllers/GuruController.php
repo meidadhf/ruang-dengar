@@ -9,6 +9,7 @@ use App\Models\Pesan;
 
 class GuruController extends Controller
 {
+    
     /**
      * Menampilkan formulir login.
      */
@@ -20,57 +21,33 @@ class GuruController extends Controller
     /**
      * Proses login.
      */
-    public function login(Request $request)
+    public function dashboard(Request $request)
     {
-        // Validasi data yang dimasukkan
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
+        // Ambil ID guru yang sedang login
+        $guru_id = auth()->user()->guru_id; // Pastikan guru sudah login dan memiliki guru_id
 
-        // Debugging: Cek kredensial yang diterima
-        \Log::info('Login attempt with:', $request->only('email', 'password'));
+        // Ambil semua pesan yang dikirim ke guru ini
+        $pesans = Pesan::where('guru_id', $guru_id)->latest()->get();
 
-        // Cek kredensial
-        if (Auth::guard('guru')->attempt($request->only('email', 'password'))) {
-            // Jika login berhasil, arahkan ke dashboard
-            return redirect()->route('guru.dashboard');
-        }
-
-        // Debugging: Jika login gagal
-        \Log::warning('Login failed for:', $request->only('email'));
-        return redirect()->back()->withInput()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ]);
-    }
-
-    /**
-     * Menampilkan dashboard guru.
-     */
-    public function dashboard()
-    {
-        // Mengambil pesan yang berkaitan dengan guru yang sedang login
-        $pesans = Pesan::where('guru_id', auth()->id())->get();
+        // Kirim pesan ke view dashboard guru
         return view('guru.dashboard', compact('pesans'));
     }
-
-    /**
-     * Menampilkan daftar guru.
-     */
-    public function daftarGuru()
+    public function login(Request $request)
     {
-        // Ambil semua guru
-        $gurus = Guru::all(); // Pastikan model Guru sudah terisi dengan data yang benar
-        return view('siswa.dashboard', compact('gurus')); // Mengarahkan ke view siswa.dashboard
-    }
+        $request->validate([
+            'guru_id' => 'required|string',
+            'password'  => 'required|string',
+        ]);
 
-    /**
-     * Proses konsul.
-     */
-    public function konsul(Request $request, $guruId)
-    {
-        // Di sini Anda bisa menangani logika untuk konsul, misalnya menyimpan data ke database
-        return redirect()->route('konsul.page', ['guruId' => $guruId]); // Mengarahkan ke halaman konsul
+        if (Auth::guard('guru')->attempt([
+            'guru_id' => $request->guru_id,
+            'password'  => $request->password,
+        ])) {
+            return redirect()->route('guru.dashboard');
+        }
+        return back()->withErrors([
+            'guru_id' => 'ID atau password salah',
+        ]);
     }
 
     /**
@@ -80,6 +57,16 @@ class GuruController extends Controller
     {
         Auth::guard('guru')->logout();
         return redirect()->route('guru.login');
+    }
+
+    public function index()
+    {
+        // Ambil semua pesan untuk guru yang sedang login
+        $pesans = Pesan::where('guru_id', auth()->user()->guru_id)->get();
+
+
+        // Kirim data pesan ke view
+        return view('guru.dashboard', compact('pesans'));
     }
 
     /**
@@ -111,14 +98,19 @@ class GuruController extends Controller
 
     public function store(Request $request)
     {
-        //
+        // Validasi input
         $request->validate([
-            'nama_guru' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:gurus',
-            'password' => 'required|string|min:8|confirmed',
+            'email' => 'required|email|unique:gurus,email',
+            'password' => 'required|min:8',
         ]);
 
-        $guru = Guru::createGuru($request->all());
+        // Buat akun guru dengan password yang di-hash
+        Guru::create([
+            'email' => $request->email,
+            'password' => bcrypt($request->password), // Gunakan bcrypt di sini
+        ]);
+
+        return redirect()->route('guru.index')->with('success', 'Akun guru berhasil dibuat.');
     }
 
     public function show(string $id)

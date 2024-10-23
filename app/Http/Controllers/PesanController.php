@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Pesan;
 
 class PesanController extends Controller
 {
@@ -13,18 +14,18 @@ class PesanController extends Controller
     {
         // Validasi input
         $request->validate([
-            'guru_id' => 'required',
-            'pesan' => 'required|string',
+            'pesan' => 'required|string|max:255',
+            'guru_id' => 'required|string',
         ]);
 
-        // Simpan pesan konsultasi (ini contoh, sesuaikan dengan model yang kamu gunakan)
-        \App\Models\Pesan::create([
+        // Simpan pesan konsultasi
+        Pesan::create([
             'guru_id' => $request->guru_id,
             'pesan' => $request->pesan,
-            // Tambahkan atribut lain jika diperlukan, seperti siswa_id atau waktu pengiriman
+            // Tambahkan atribut lain jika diperlukan
         ]);
 
-        // Redirect setelah pesan berhasil dikirim
+        // Redirect atau kembali ke halaman sebelumnya
         return redirect()->back()->with('success', 'Pesan berhasil dikirim!');
     }
 

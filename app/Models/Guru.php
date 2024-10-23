@@ -2,38 +2,23 @@
 
 namespace App\Models;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Eloquent\Model;
 
-class Guru extends Authenticatable
+class Guru extends Model
 {
-    use Notifiable;
-
-    protected $table = 'gurus';
+    protected $table = 'gurus'; // Nama tabel
+    protected $primaryKey = 'guru_id'; // Kolom kunci utama
+    public $timestamps = true; // Jika kamu memiliki kolom created_at dan updated_at
 
     protected $fillable = [
-        'nama_guru', 'email', 'password',
+        'guru_id',
+        'nama_guru',
+        'email',
+        'password',
     ];
-
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
-
+    // Relasi ke pesan
     public function pesans()
     {
         return $this->hasMany(Pesan::class);
-    }
-
-    // Metode untuk membuat guru baru
-    public static function createGuru($data)
-    {
-        $guru = new self();
-        $guru->nama_guru = $data['nama_guru'];
-        $guru->email = $data['email'];
-        $guru->password = Hash::make($data['password']); // Menggunakan Hash di sini
-        $guru->save();
-
-        return $guru;
     }
 }

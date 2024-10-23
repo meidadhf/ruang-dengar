@@ -7,7 +7,7 @@
         <meta name="author" content="" />
         <title>Ruang Dengar - Ayo Konseling Tanpa Diketahui!</title>
         <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/rd.ico" />
+        <link rel="icon" type="image/x-icon" href="{{ asset('template/rd.ico') }}" />
         <!-- Custom Google font-->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

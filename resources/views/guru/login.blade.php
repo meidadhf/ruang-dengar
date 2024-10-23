@@ -5,9 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Ruang Dengar - AyoKonseling Tanpa Diketahui!</title>
+        <title>Ruang Dengar - Ayo Konseling Tanpa Diketahui!</title>
         <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="public/template/rd.ico" />
+        <link rel="icon" type="image/x-icon" href="{{ asset('template/rd.ico') }}" />
         <!-- Custom Google font-->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -51,24 +51,21 @@
                                     <div class="row gx-5 justify-content-center">
                                         <div class="col-lg-8 col-xl-6">
                                             <!-- Form login guru-->
-                                            <form id="formGuru" action="{{ route('login.guru')}}" method="POST">
+                                            <form id="formGuru" action="{{ route('guru.login.submit')}}" method="POST">
                                                 @csrf
                                                 <!-- Username input-->
                                                 <div class="form-floating mb-3">
                                                     <input class="form-control" id="idguru" name="idguru" type="text" placeholder="Enter your ID..." required />
                                                     <label for="idguru">ID</label>
                                                 </div>
-                                                <!-- Email address input-->
-                                                <div class="form-floating mb-3">
-                                                    <input class="form-control" id="email" name="email" type="email" placeholder="Enter your email..." required />
-                                                    <label for="email">Email</label>
-                                                </div>
+
                                                 <!-- Password input-->
                                                 <div class="form-floating mb-3 position-relative">
                                                     <input class="form-control" id="password" name="password" type="password" placeholder="Enter your password..." required />
                                                     <label for="password">Password</label>
-                                                    <span id="togglePasswordIconGuru" onclick="toggleGuruPassword()" style="cursor: pointer; position: absolute; right: 10px; top: 20px;"></span>
+                                                    <span id="togglePasswordIconGuru" onclick="toggleGuruPassword()" style="cursor: pointer; position: absolute; right: 10px; top: 20px;" class="bi bi-eye"></span>
                                                 </div>
+
                                                 <!-- Submit Button-->
                                                 <div class="d-grid">
                                                     <button class="btn btn-primary btn-lg" id="submitButton" type="submit">Submit</button>
@@ -103,31 +100,19 @@
         <!-- Core theme JS-->
         <script src="{{ asset('template/js/scripts.js') }}"></script>
         <script>
-            function validateGuruForm(event) {
-                event.preventDefault();
-
-                var id = document.getElementById("idguru").value;
-                var email = document.getElementById("email").value;
-                var password = document.getElementById("password").value;
-
-                // Cek jika semua field diisi
-                if (id === "" || email === "" || password === "") {
-                    alert("Semua field harus diisi!");
-                    event.preventDefault();
-                }
-            }
-
-            // Fungsi untuk toggle tampilan password pada form guru
             function toggleGuruPassword() {
-                var passwordField = document.getElementById("password");
-                var toggleIcon = document.getElementById("togglePasswordIconGuru");
-                 if (passwordField.type === "password") {
-                    passwordField.type = "text";
-                    toggleIcon.innerHTML = "🙈"; // Icon untuk sembunyikan
+                const passwordInput = document.getElementById('password');
+                const toggleIcon = document.getElementById('togglePasswordIcon');
+
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    toggleIcon.classList.remove('bi-eye');
+                    toggleIcon.classList.add('bi-eye-slash');
                 } else {
-                    passwordField.type = "password";
-                    toggleIcon.innerHTML = "👁"; // Icon untuk tampilkan
-                 }
+                    passwordInput.type = 'password';
+                    toggleIcon.classList.remove('bi-eye-slash');
+                    toggleIcon.classList.add('bi-eye');
+                }
             }
         </script>
     </body>
