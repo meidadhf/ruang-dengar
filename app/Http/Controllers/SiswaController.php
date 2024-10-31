@@ -23,41 +23,43 @@ class SiswaController extends Controller
      * Proses login siswa dengan guard siswa.
      */
     public function loginSiswa(Request $request)
-{
-    // Validasi input NIS dan password
-    $credentials = $request->validate([
-        'nis' => 'required|string',
-        'password' => 'required|string',
-    ]);
+    {
+        // Validasi input NIS dan password
+        $credentials = $request->validate([
+            'nis' => 'required|string',
+            'password' => 'required|string',
+        ]);
 
-    // Cek kredensial siswa
-    if (Auth::attempt($credentials)) {
-        // Jika autentikasi berhasil, redirect ke dashboard siswa
-        return redirect()->route('siswa.dashboard');
+        // Cek kredensial siswa menggunakan guard siswa
+        if (Auth::guard('siswa')->attempt($credentials)) {
+            // Jika autentikasi berhasil, redirect ke dashboard siswa
+            return redirect()->route('siswa.dashboard');
+        }
+
+        // Jika gagal login, redirect kembali ke halaman login dengan error
+        return back()->withErrors(['loginError' => 'NIS atau password salah.']);
     }
 
-    // Jika gagal login, redirect kembali ke halaman login dengan error
-    return back()->withErrors(['loginError' => 'NIS atau password salah.']);
-}
-
+        
     /**
      * Menampilkan dashboard siswa setelah login dengan guard siswa.
      */
     public function showDashboard()
     {
-        return view('siswa.dashboard');
+        // Ambil semua data guru untuk ditampilkan di dashboard siswa
+        $gurus = Guru::all();
+
+        return view('siswa.dashboard', compact('gurus'));
     }
 
     /**
      * Menampilkan halaman konsul
      */
-
     public function konsul($guru_id, $nama_guru)
     {
          // Kirim data guru ke view
          return view('siswa.konsul', compact('guru_id', 'nama_guru'));
     }
-
 
     /**
      * Mengirim pesan ke guru untuk konsultasi.
@@ -85,7 +87,9 @@ class SiswaController extends Controller
      */
     public function lihatBalasan()
     {
+        // Ambil semua pesan terkait siswa yang sedang login
         $pesans = Auth::guard('siswa')->user()->pesans; // Pastikan relasi di model `Siswa` sudah benar
+
         return view('siswa.lihat-balasan', compact('pesans'));
     }
 }

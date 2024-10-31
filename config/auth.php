@@ -35,14 +35,24 @@ return [
     |
     */
     'guards' => [
-        'web' => [
+       'web' => [
             'driver' => 'session',
             'provider' => 'users',
         ],
 
         'guru' => [
             'driver' => 'session',
-            'provider' => 'gurus', // Provider untuk guru
+            'provider' => 'gurus',
+        ],
+
+        'siswa' => [
+            'driver' => 'session',
+            'provider' => 'siswas',
+        ],
+
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
         ],
     ],
 
@@ -72,7 +82,17 @@ return [
 
         'gurus' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Guru::class, // Model untuk guru
+            'model' => App\Models\Guru::class,
+        ],
+
+        'siswas' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Siswa::class,
+        ],
+
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
         ],
     ],
 

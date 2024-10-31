@@ -9,7 +9,7 @@ use App\Models\Pesan;
 
 class GuruController extends Controller
 {
-    
+
     /**
      * Menampilkan formulir login.
      */
@@ -21,10 +21,30 @@ class GuruController extends Controller
     /**
      * Proses login.
      */
+    public function loginGuru(Request $request)
+    {
+        $credentials = $request->only('guru_id', 'password');
+
+        if (Auth::guard('guru')->attempt($credentials)) {
+            // Login berhasil, arahkan ke dashboard
+            return redirect()->route('guru.dashboard');
+        }
+
+        // Jika login gagal, kembali ke form login dengan pesan error
+        return back()->withErrors(['loginError' => 'ID Guru atau password salah.']);
+    }
+
     public function dashboard(Request $request)
     {
+        // Cek apakah guru sudah login
+        if (!auth()->check()) {
+            \Log::info('Guru tidak login, redirect ke login.');
+            return redirect()->route('guru.login')->withErrors(['loginError' => 'Silakan login terlebih dahulu.']);
+        }
+
         // Ambil ID guru yang sedang login
-        $guru_id = auth()->user()->guru_id; // Pastikan guru sudah login dan memiliki guru_id
+        $guru_id = auth()->user()->guru_id;
+        \Log::info('Guru ID: ' . $guru_id); // Log guru ID
 
         // Ambil semua pesan yang dikirim ke guru ini
         $pesans = Pesan::where('guru_id', $guru_id)->latest()->get();
@@ -32,23 +52,7 @@ class GuruController extends Controller
         // Kirim pesan ke view dashboard guru
         return view('guru.dashboard', compact('pesans'));
     }
-    public function login(Request $request)
-    {
-        $request->validate([
-            'guru_id' => 'required|string',
-            'password'  => 'required|string',
-        ]);
 
-        if (Auth::guard('guru')->attempt([
-            'guru_id' => $request->guru_id,
-            'password'  => $request->password,
-        ])) {
-            return redirect()->route('guru.dashboard');
-        }
-        return back()->withErrors([
-            'guru_id' => 'ID atau password salah',
-        ]);
-    }
 
     /**
      * Proses logout.

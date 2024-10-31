@@ -51,12 +51,12 @@
                                     <div class="row gx-5 justify-content-center">
                                         <div class="col-lg-8 col-xl-6">
                                             <!-- Form login guru-->
-                                            <form id="formGuru" action="{{ route('guru.login.submit')}}" method="POST">
+                                            <form id="formGuru" action="{{ route('guru.login.submit') }}" method="POST">
                                                 @csrf
                                                 <!-- Username input-->
                                                 <div class="form-floating mb-3">
-                                                    <input class="form-control" id="idguru" name="idguru" type="text" placeholder="Enter your ID..." required />
-                                                    <label for="idguru">ID</label>
+                                                    <input class="form-control" id="guru_id" name="guru_id" type="text" placeholder="Enter your ID..." required />
+                                                    <label for="guru_id">ID</label>
                                                 </div>
 
                                                 <!-- Password input-->
@@ -65,12 +65,12 @@
                                                     <label for="password">Password</label>
                                                     <span id="togglePasswordIconGuru" onclick="toggleGuruPassword()" style="cursor: pointer; position: absolute; right: 10px; top: 20px;" class="bi bi-eye"></span>
                                                 </div>
-
                                                 <!-- Submit Button-->
                                                 <div class="d-grid">
                                                     <button class="btn btn-primary btn-lg" id="submitButton" type="submit">Submit</button>
                                                 </div>
                                             </form>
+                                            
                                         </div>
                                     </div>
                                 </div>

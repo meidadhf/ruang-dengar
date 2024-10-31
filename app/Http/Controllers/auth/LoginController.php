@@ -8,48 +8,33 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    // Property untuk redirect setelah login
-    protected $redirectTo = 'siswa/dashboard'; // Setelah login
-
-
     public function showLoginForm()
-{
-    return view('auth.login'); // Pastikan file auth/login.blade.php ada
-}
-
-
-    // Fungsi login
-    public function login(Request $request)
     {
-        // Validasi input login
-        $credentials = $request->validate([
-            'email' => ['required', 'email'], // Pastikan format email
-            'password' => ['required'], // Validasi password
-        ]);
-
-        // Mencoba untuk login dengan credentials
-        if (Auth::attempt($credentials)) { // Gunakan Auth default tanpa guard
-            // Jika login berhasil, regenerate session
-            $request->session()->regenerate();
-
-            // Redirect ke halaman dashboard siswa
-            return redirect()->intended($this->redirectTo);
-        }
-
-        // Jika login gagal, kembalikan ke halaman login dengan error
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ]);
+        return view('login'); // Form login universal
     }
 
-    // Fungsi logout
-    public function logout(Request $request)
+    public function login(Request $request)
     {
-        Auth::logout();
+        $credentials = $request->only('user_id', 'password');
+        $prefix = substr($credentials['user_id'], 0, 3);
 
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        if ($prefix === '224') {
+            $guard = 'siswa';
+            $redirectRoute = 'siswa.dashboard';
+        } elseif ($prefix === '005') {
+            $guard = 'guru';
+            $redirectRoute = 'guru.dashboard';
+        } elseif ($prefix === '001') {
+            $guard = 'admin';
+            $redirectRoute = 'admin.dashboard';
+        } else {
+            return back()->withErrors(['loginError' => 'ID tidak valid']);
+        }
 
-        return redirect('siswa/dashboard');
+        if (Auth::guard($guard)->attempt(['id' => $credentials['user_id'], 'password' => $credentials['password']])) {
+            return redirect()->route($redirectRoute);
+        }
+
+        return back()->withErrors(['loginError' => 'ID atau password salah']);
     }
 }

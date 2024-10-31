@@ -6,11 +6,6 @@ use Illuminate\Foundation\Auth\User as Aunthenticatable;
 
 class Siswa extends Aunthenticatable
 {
-    protected $fillable  = ['nis', 'password'];
-
-    //relasi ke tabel konsultasi
-    public function pesans()
-    {
-        return $this->hasMany(Pesan::class);
-    }
+    protected $guard  = 'siswa';
+    protected $fillable = ['nis', 'nama', 'email', 'kelas', 'alamat']; // Tambahkan field lainnya
 }

@@ -2,151 +2,61 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Siswa;
 use App\Models\Guru;
+use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function showLoginForm()
+    public function index()
     {
-        return view('admin.login');
+        $siswa = Siswa::all();
+        $guru = Guru::all();
+        return view('admin.index', compact('siswa', 'guru'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function login(Request $request)
+    public function create()
     {
-        $credentials = $request->only('email', 'password');
-        if (auth()->guard('admin')->attempt($credentials)) {
-            return redirect()->route('admin.dashboard');
-        }
-
-        return back()->withErrors(['email' => 'Email atau password salah.']);
+        return view('admin.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function dashboard()
-    {
-        return view('admin.dashboard');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function createGuruForm()
-    {
-        return view('admin.create-guru');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function storeGuru(Request $request)
+    public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:gurus',
-            'password' => 'required',
+            'guru_id' => 'required',
+            'nama_guru' => 'required', // tambahkan validasi untuk nama_guru
+            'deskripsi' => 'required',
+            // tambahkan field lain yang diperlukan
         ]);
 
         Guru::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
+            'guru_id' => $request->guru_id,
+            'nama_guru' => $request->nama_guru, // pastikan nama_guru ada di sini
+            'deskripsi' => $request->deskripsi,
+            // field lain yang diperlukan
         ]);
 
-        return redirect()->route('admin.dashboard')->with('success', 'Data guru berhasil ditambahkan.');
+        return redirect()->route('admin.data.index')->with('success', 'Data guru berhasil ditambahkan');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function createSiswaForm()
+
+    public function edit($id, Request $request)
     {
-        return view('admin.create-siswa');
+        $data = $request->type === 'siswa' ? Siswa::find($id) : Guru::find($id);
+        return view('admin.edit', compact('data', 'type'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function storeSiswa(Request $request)
+    public function update(Request $request, $id)
     {
-        $request->validate([
-            'nis' => 'required|unique:siswas',
-            'password' => 'required',
-        ]);
-
-        Siswa::create([
-            'nis' => $request->nis,
-            'password' => bcrypt($request->password),
-        ]);
-
-        return redirect()->route('admin.dashboard')->with('success', 'Data siswa berhasil ditambahkan.');
+        $data = $request->type === 'siswa' ? Siswa::find($id) : Guru::find($id);
+        $data->update($request->all());
+        return redirect()->route('admin.data.index');
     }
-    public function deleteGuru($id)
+
+    public function destroy($id, Request $request)
     {
-        Guru::findOrFail($id)->delete();
-        return redirect()->route('admin.dashboard')->with('success', 'Data guru berhasil dihapus.');
+        $data = $request->type === 'siswa' ? Siswa::find($id) : Guru::find($id);
+        $data->delete();
+        return redirect()->route('admin.data.index');
     }
-    public function deleteSiswa($id)
-    {
-        Siswa::findOrFail($id)->delete();
-        return redirect()->route('admin.dashboard')->with('success', 'Data siswa berhasil dihapus.');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
-
 }
