@@ -2,43 +2,22 @@
 
 @section('content')
 <div class="container my-5">
-    <h1>Data Siswa dan Guru</h1>
-    <a href="{{ route('admin.data.create') }}" class="btn btn-primary mb-3">Tambah Data</a>
+    <h1>Edit Data</h1>
+    <form action="{{ route('admin.update', ['id' => $data->guru_id ?? $data->siswa_id, 'type' => $type]) }}" method="POST">
+        @csrf
+        @method('PUT')
 
-    <h2>Data Siswa</h2>
-    <table class="table">
-        <tr><th>Nama</th><th>Aksi</th></tr>
-        @foreach ($siswa as $s)
-        <tr>
-            <td>{{ $s->nama }}</td>
-            <td>
-                <a href="{{ route('admin.data.edit', ['siswa_id' => $s->siswa_id]) }}" class="btn btn-warning">Edit</a>
-                <form action="{{ route('admin.data.destroy', ['siswa_id' => $s->siswa_id]) }}" method="POST" style="display:inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button class="btn btn-danger">Hapus</button>
-                </form>
-            </td>
-        </tr>
-    @endforeach
-    </table>
+        <div class="mb-3">
+            <label for="nama" class="form-label">Nama</label>
+            <input type="text" name="nama_guru" class="form-control" value="{{ $data->nama_guru }}" required>
+        </div>
 
-    <h2>Data Guru</h2>
-    <table class="table">
-        <tr><th>Nama</th><th>Aksi</th></tr>
-        @foreach ($guru as $g)
-            <tr>
-                <td>{{ $g->nama }}</td>
-                <td>
-                    <a href="{{ route('admin.data.edit', ['guru_id' => $g->guru_id]) }}" class="btn btn-warning">Edit</a>
-                    <form action="{{ route('admin.data.destroy', ['guru_id' => $g->guru_id]) }}" method="POST" style="display:inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-danger">Hapus</button>
-                    </form>
-                </td>
-            </tr>
-        @endforeach
-    </table>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password (kosongkan jika tidak ingin mengubah)</label>
+            <input type="password" name="password" class="form-control">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update</button>
+    </form>
 </div>
 @endsection

@@ -12,11 +12,10 @@ class CreateGurusTable extends Migration
     public function up(): void
     {
         Schema::create('gurus', function (Blueprint $table) {
-            $table->id('guru_id');
-            $table->string('nama_guru');
-            $table->string('email')->unique();
-            $table->text('password');
-            $table->timestamps();
+            $table->id('guru_id'); // Menentukan kolom primary key
+            $table->string('nama_guru'); // Nama guru
+            $table->string('password'); // Kolom untuk menyimpan password
+            $table->timestamps(); // Kolom created_at dan updated_at
         });
     }
 
@@ -27,4 +26,4 @@ class CreateGurusTable extends Migration
     {
         Schema::dropIfExists('gurus');
     }
-};
+}
