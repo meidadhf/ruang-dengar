@@ -10,28 +10,30 @@ class LoginController extends Controller
 {
     public function showLoginForm()
     {
-        return view('login'); // Form login universal
+        return view('templates.login'); // Form login universal
     }
 
     public function login(Request $request)
     {
-        $credentials = $request->only('user_id', 'password');
-        $prefix = substr($credentials['user_id'], 0, 3);
+        $request->validate([
+            'user_id' => 'required|string',
+            'password' => 'required|string',
+            'role' => 'required|in:siswa,guru',
+        ]);
 
-        if ($prefix === '224') {
+        $credentials = $request->only('user_id', 'password');
+
+        // Tentukan guard dan route berdasarkan role yang dipilih
+        if ($request->role === 'siswa') {
             $guard = 'siswa';
-            $redirectRoute = 'siswa.dashboard';
-        } elseif ($prefix === '005') {
+            $redirectRoute = 'siswa.dashboard'; // Sesuaikan dengan route untuk dashboard siswa
+        } elseif ($request->role === 'guru') {
             $guard = 'guru';
-            $redirectRoute = 'guru.dashboard';
-        } elseif ($prefix === '001') {
-            $guard = 'admin';
-            $redirectRoute = 'admin.dashboard';
-        } else {
-            return back()->withErrors(['loginError' => 'ID tidak valid']);
+            $redirectRoute = 'guru.dashboard'; // Sesuaikan dengan route untuk dashboard guru
         }
 
-        if (Auth::guard($guard)->attempt(['id' => $credentials['user_id'], 'password' => $credentials['password']])) {
+        // Coba autentikasi menggunakan guard yang sesuai
+        if (Auth::guard($guard)->attempt(['guru_id' => $credentials['user_id'], 'password' => $credentials['password']])) {
             return redirect()->route($redirectRoute);
         }
 

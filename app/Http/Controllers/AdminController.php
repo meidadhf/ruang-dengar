@@ -40,26 +40,35 @@ class AdminController extends Controller
         return redirect()->route('admin.data.index')->with('success', 'Data guru berhasil disimpan.');
     }    
 
-    public function edit($id, Request $request)
+    public function edit($id, $type)
     {
-        $data = $request->type === 'siswa' ? Siswa::find('guru_id', $id) : Guru::where('guru_id', $id)->first();
-        if (!$data) {
-            return redirect()->route('admin.data.index')->with('error', 'Data tidak ditemukan');
+        // Cek tipe, lalu ambil data sesuai tipe
+        if ($type === 'guru') {
+            $data = Guru::findOrFail($id);
+        } else if ($type === 'siswa') {
+            $data = Siswa::findOrFail($id);
+        } else {
+            abort(404); // Tampilkan halaman error jika tipe tidak sesuai
         }
     
-        // Menentukan tipe data (siswa atau guru)
-        $type = $request->type; // Menyimpan tipe ke variabel $type
+        return view('admin.edit', compact('data', 'type'));
+    }
     
-        // Tampilkan view edit dengan data yang ditemukan dan tipe
-        return view('admin.edit', compact('data', 'type'));     
-    }
 
-    public function update(Request $request, $id)
-    {
-        $data = $request->type === 'siswa' ? Siswa::find($id) : Guru::find($id);
-        $data->update($request->all());
-        return redirect()->route('admin.data.index');
-    }
+    
+public function update(Request $request, $id)
+{
+    $request->validate([
+        'nama_guru' => 'required|string|max:255',
+        'password' => 'required|string|min:8', // atau sesuai kebijakan
+    ]);
+
+    $guru = Guru::findOrFail($id);
+    $guru->update($request->only('nama_guru', 'password'));
+
+    return redirect()->route('admin.index')->with('success', 'Data guru berhasil diperbarui');
+}
+
 
     public function destroy($id, Request $request)
     {

@@ -2,22 +2,67 @@
 
 @section('content')
 <div class="container my-5">
-    <h1>Edit Data</h1>
-    <form action="{{ route('admin.update', ['id' => $data->guru_id ?? $data->siswa_id, 'type' => $type]) }}" method="POST">
-        @csrf
-        @method('PUT')
+    <h1>Data Siswa dan Guru</h1>
 
-        <div class="mb-3">
-            <label for="nama" class="form-label">Nama</label>
-            <input type="text" name="nama_guru" class="form-control" value="{{ $data->nama_guru }}" required>
-        </div>
+    <!-- Tautan untuk menambah data baru -->
+    <div class="mb-3">
+        <a href="{{ route('admin.data.create') }}" class="btn btn-success">Tambah Data</a>
+    </div>
 
-        <div class="mb-3">
-            <label for="password" class="form-label">Password (kosongkan jika tidak ingin mengubah)</label>
-            <input type="password" name="password" class="form-control">
-        </div>
+    <!-- Tabel Data Siswa -->
+    <h2>Data Siswa</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID Siswa</th>
+                <th>Nama Siswa</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($siswa as $data) <!-- Mengganti $guru menjadi $siswa -->
+                <tr>
+                    <td>{{ $data->siswa_id }}</td>
+                    <td>{{ $data->nama_siswa }}</td>
+                    <td>
+                        <a href="{{ route('admin.edit', ['id' => $data->siswa_id, 'type' => 'siswa']) }}" class="btn btn-warning">Edit</a> <!-- Menggunakan id siswa -->
+                        <form action="{{ route('admin.data.destroy', ['id' => $data->siswa_id, 'type' => 'siswa']) }}" method="POST" style="display:inline;"> <!-- Menyesuaikan dengan rute yang benar -->
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Hapus</button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
 
-        <button type="submit" class="btn btn-primary">Update</button>
-    </form>
+    <!-- Tabel Data Guru -->
+    <h2>Data Guru</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID Guru</th>
+                <th>Nama Guru</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($guru as $data)
+                <tr>
+                    <td>{{ $data->guru_id }}</td>
+                    <td>{{ $data->nama_guru }}</td>
+                    <td>
+                        <a href="{{ route('admin.edit', ['id' => $data->guru_id, 'type' => 'guru']) }}" class="btn btn-warning">Edit</a>
+                        <form action="{{ route('admin.data.destroy', ['guru_id' => $data->guru_id]) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Hapus</button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
 </div>
 @endsection

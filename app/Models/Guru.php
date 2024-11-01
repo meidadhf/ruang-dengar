@@ -2,16 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Guru extends Authenticatable
 {
-    protected $guard = 'guru'; // Pastikan ini diperlukan sesuai dengan sistem autentikasi Anda
-    protected $primaryKey = 'guru_id'; // Menentukan kolom primary key
-    protected $fillable = ['guru_id', 'nama_guru', 'password']; // Sesuaikan dengan kolom yang ada di database
+    // Definisikan atribut dan relasi model di sini
+    protected $table = 'gurus'; 
+    protected $primaryKey = 'guru_id'; 
 
-    public function setPasswordAttribute($value)
-    {
-        $this->attributes['password'] = bcrypt($value);
-    }
+    // Tambahkan atribut lain yang diperlukan, misalnya:
+    protected $fillable = ['nama_guru', 'password']; // Atribut yang dapat diisi
 }
