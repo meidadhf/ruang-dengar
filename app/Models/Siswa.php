@@ -1,16 +1,18 @@
 <?php
-
 namespace App\Models;
 
-use Illuminate\Foundation\Auth\User as Aunthenticatable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class Siswa extends Aunthenticatable
+class Siswa extends Model
 {
-    protected $guard  = 'siswa';
-    // protected $fillable = ['nis', 'nama', 'email', 'kelas', 'alamat']; // Tambahkan field lainnya
+    use HasFactory;
 
-    public function guru()
-    {
-        return $this->belongsTo(Guru::class, 'guru_id'); // jika ada kolom guru_id di siswas
-    }    
+    protected $table = 'siswa'; // Nama tabel, sesuaikan dengan yang ada di database
+
+    protected $fillable = [
+        'siswa_id',
+        'password',
+        'nama',
+    ];
 }

@@ -15,7 +15,7 @@
         <thead>
             <tr>
                 <th>ID Siswa</th>
-                <th>Nama Siswa</th>
+                <th>Nama</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -23,7 +23,7 @@
             @foreach ($siswa as $data) <!-- Mengganti $guru menjadi $siswa -->
                 <tr>
                     <td>{{ $data->siswa_id }}</td>
-                    <td>{{ $data->nama_siswa }}</td>
+                    <td>{{ $data->siswa_nama }}</td>
                     <td>
                         <a href="{{ route('admin.edit', ['id' => $data->siswa_id, 'type' => 'siswa']) }}" class="btn btn-warning">Edit</a> <!-- Menggunakan id siswa -->
                         <form action="{{ route('admin.data.destroy', ['id' => $data->siswa_id, 'type' => 'siswa']) }}" method="POST" style="display:inline;"> <!-- Menyesuaikan dengan rute yang benar -->
@@ -54,11 +54,11 @@
                     <td>{{ $data->nama_guru }}</td>
                     <td>
                         <a href="{{ route('admin.edit', ['id' => $data->guru_id, 'type' => 'guru']) }}" class="btn btn-warning">Edit</a>
-                        <form action="{{ route('admin.data.destroy', ['guru_id' => $data->guru_id]) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Hapus</button>
-                        </form>
+                        <form action="{{ route('admin.data.destroy', ['id' => $s->siswa_id, 'type' => 'siswa']) }}" method="POST" style="display:inline;">
+    @csrf
+    @method('DELETE')
+    <button type="submit" class="btn btn-danger">Hapus</button>
+</form>
                     </td>
                 </tr>
             @endforeach

@@ -61,6 +61,34 @@ class SiswaController extends Controller
          return view('siswa.konsul', compact('guru_id', 'nama_guru'));
     }
 
+    public function store(Request $request)
+    {
+        // Validasi input untuk siswa
+        $request->validate([
+            'siswa_id' => 'nullable|unique:siswa,siswa_id',
+            'password' => 'required',
+            'nama' => 'nullable|string|max:255', // Validasi untuk field nama
+        ]);
+
+        // Simpan data siswa
+        Siswa::create([
+            'siswa_id' => $request->siswa_id,
+            'password' => bcrypt($request->password), // Enkripsi password
+            'nama' => $request->nama, // Menyimpan nama siswa
+        ]);
+
+        return redirect()->route('admin.data.index')->with('success', 'Data siswa berhasil disimpan.');
+    }
+
+    public function destroy($siswa_id)
+    {
+        // Hapus data siswa berdasarkan siswa_id
+        Siswa::where('siswa_id', $siswa_id)->delete();
+    
+        return redirect()->route('admin.data.index')->with('success', 'Data siswa berhasil dihapus.');
+    }
+    
+
     /**
      * Mengirim pesan ke guru untuk konsultasi.
      */
@@ -81,6 +109,7 @@ class SiswaController extends Controller
         // Redirect atau kembalikan ke halaman sebelumnya
         return back()->with('success', 'Pesan telah terkirim.');
     }
+
 
     /**
      * Menampilkan balasan dari guru.

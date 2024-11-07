@@ -15,6 +15,7 @@ class CreateSiswasTable extends Migration
             $table->id('siswa_id');
             $table->string('nis')->nullable()->change();
             $table->string('password');
+            $table->string('nama')->nullable(); // Menambahkan nullable pada kolom nama
             $table->timestamps();
         });
     }
